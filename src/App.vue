@@ -42,7 +42,8 @@ export default {
     };
   },
   methods: {
-    createPost() {
+    createPost(event) {
+      event.preventDefault();
       const newPost = {
         id: Date.now(),
         title: this.title,
