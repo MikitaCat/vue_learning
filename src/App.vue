@@ -1,7 +1,7 @@
 // Component MarkUp
 <template>
   <div class="app">
-    <post-form />
+    <post-form @create="createPost" />
     <post-list :posts="posts" />
   </div>
 </template>
@@ -25,20 +25,11 @@ export default {
         { id: 3, title: "Lorem Ips", body: "Some text for post 1234" },
         { id: 4, title: "Lorem Ip", body: "Some text for post 5678" },
       ],
-      title: "",
-      body: "",
     };
   },
   methods: {
-    createPost() {
-      const newPost = {
-        id: Date.now(),
-        title: this.title,
-        body: this.body,
-      };
-      this.posts.push(newPost);
-      this.title = "";
-      this.body = "";
+    createPost(post) {
+      console.log(post);
     },
 
     // inputTitle(event) {

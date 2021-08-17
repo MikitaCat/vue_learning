@@ -13,7 +13,7 @@
       type="text"
       placeholder="Post Body"
     />
-    <button class="btn">Create</button>
+    <button @click="createPost" class="btn">Create</button>
   </form>
 </template>
 
@@ -26,6 +26,16 @@ export default {
         body: "",
       },
     };
+  },
+  methods: {
+    createPost() {
+      this.post.id = Date.now();
+      this.$emit("create", this.post);
+      this.post = {
+        title: "",
+        body: "",
+      };
+    },
   },
 };
 </script>
