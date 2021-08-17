@@ -15,7 +15,7 @@
     />
     <my-button
       style="align-self: flex-end; margin-top: 15px"
-      @click="createPost"
+      @click.native="createPost"
       >Create</my-button
     >
   </form>

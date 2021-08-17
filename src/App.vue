@@ -29,6 +29,7 @@ export default {
   },
   methods: {
     createPost(post) {
+      debugger;
       this.posts.push(post);
     },
 
