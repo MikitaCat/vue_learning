@@ -1,12 +1,21 @@
 <template>
-  <div v-for="post in posts" class="post">
-    <div><strong>Title:</strong>{{ post.title }}</div>
-    <div><strong>Description:</strong>{{ post.body }}</div>
+  <div>
+    <div v-for="post in posts" class="post">
+      <div><strong>Title:</strong>{{ post.title }}</div>
+      <div><strong>Description:</strong>{{ post.body }}</div>
+    </div>
   </div>
 </template>
 
 <script>
-export default {};
+export default {
+  props: {
+    posts: {
+      type: Array,
+      required: true,
+    },
+  },
+};
 </script>
 
 <style scoped>
