@@ -1,7 +1,7 @@
 // Component MarkUp
 <template>
   <div class="app">
-    <form>
+    <form @submit.prevent>
       <h4>Add New Post</h4>
       <input
         v-bind:value="title"
@@ -42,8 +42,7 @@ export default {
     };
   },
   methods: {
-    createPost(event) {
-      event.preventDefault();
+    createPost() {
       const newPost = {
         id: Date.now(),
         title: this.title,
