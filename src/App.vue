@@ -2,7 +2,7 @@
 <template>
   <div class="app">
     <post-form />
-    <post-list v-bind:posts="posts" />
+    <post-list :posts="posts" />
   </div>
 </template>
 
