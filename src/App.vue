@@ -1,14 +1,17 @@
 <template>
-    <div>
-        Hello
-    </div>
+  <div>
+    <div>likes: <strong>{{ likes }}</strong></div>
+  </div>
 </template>
 
 <script>
 export default {
-    name: 'App'
-}
+  data() {
+    return {
+      likes: 0,
+    };
+  },
+};
 </script>
 
-<style>
-</style>
+<style></style>
