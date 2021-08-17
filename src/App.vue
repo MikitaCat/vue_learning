@@ -5,7 +5,7 @@
       <h4>Add New Post</h4>
       <input
         v-bind:value="title"
-        @input="inputTitle"
+        @input="title = $event.target.value"
         class="input"
         type="text"
         placeholder="Post title"
@@ -43,9 +43,9 @@ export default {
   methods: {
     createPost() {},
 
-    inputTitle(event) {
-      this.title = event.target.value;
-    },
+    // inputTitle(event) {
+    //   this.title = event.target.value;
+    // },
   },
 };
 </script>
