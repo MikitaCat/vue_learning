@@ -1,6 +1,8 @@
 // Component MarkUp
 <template>
-  <div>
+  <div class="post">
+    <div><strong>Title:</strong></div>
+    <div><strong>Description:</strong></div>
   </div>
 </template>
 
@@ -8,14 +10,21 @@
 //Component model
 export default {
   data() {
-    return {
-
-    };
+    return {};
   },
-  methods: {
-
-  }
+  methods: {},
 };
 </script>
 
-<style></style>
+<style>
+* {
+  margin: 0;
+  padding: 0;
+  box-sizing: border-box;
+}
+
+.post{
+  padding: 15px;
+  border: solid 2px teal;
+}
+</style>
