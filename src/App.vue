@@ -29,7 +29,7 @@ export default {
   },
   methods: {
     createPost(post) {
-      console.log(post);
+      this.posts.push(post);
     },
 
     // inputTitle(event) {
