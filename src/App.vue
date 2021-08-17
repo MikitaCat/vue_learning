@@ -12,6 +12,7 @@
       />
       <input
         v-bind:value="body"
+        @input="body = $event.target.value"
         class="input"
         type="text"
         placeholder="Post Body"
@@ -41,7 +42,14 @@ export default {
     };
   },
   methods: {
-    createPost() {},
+    createPost() {
+      const newPost = {
+        id: Date.now(),
+        title: this.title,
+        body: this.body,
+      };
+      this.posts.push(newPost);
+    },
 
     // inputTitle(event) {
     //   this.title = event.target.value;
