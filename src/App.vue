@@ -3,9 +3,20 @@
   <div class="app">
     <form>
       <h4>Add New Post</h4>
-      <input class="input" type="text" placeholder="Post title" />
-      <input class="input" type="text" placeholder="Post Body" />
-      <button class="btn">Create</button>
+      <input
+        v-bind:value="title"
+        @input="inputTitle"
+        class="input"
+        type="text"
+        placeholder="Post title"
+      />
+      <input
+        v-bind:value="body"
+        class="input"
+        type="text"
+        placeholder="Post Body"
+      />
+      <button class="btn" @click="createPost">Create</button>
     </form>
     <div v-for="post in posts" class="post">
       <div><strong>Title:</strong>{{ post.title }}</div>
@@ -25,9 +36,17 @@ export default {
         { id: 3, title: "Lorem Ips", body: "Some text for post 1234" },
         { id: 4, title: "Lorem Ip", body: "Some text for post 5678" },
       ],
+      title: "",
+      body: "",
     };
   },
-  methods: {},
+  methods: {
+    createPost() {},
+
+    inputTitle(event) {
+      this.title = event.target.value;
+    },
+  },
 };
 </script>
 
