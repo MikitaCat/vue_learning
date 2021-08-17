@@ -1,8 +1,10 @@
 // Component MarkUp
 <template>
-  <div class="post">
-    <div><strong>Title:</strong></div>
-    <div><strong>Description:</strong></div>
+  <div>
+    <div v-for="post in posts" class="post">
+      <div><strong>Title:</strong>{{ post.title }}</div>
+      <div><strong>Description:</strong>{{ post.body }}</div>
+    </div>
   </div>
 </template>
 
@@ -10,7 +12,14 @@
 //Component model
 export default {
   data() {
-    return {};
+    return {
+      posts: [
+        { id: 1, title: "Lorem Ipsum", body: "Some text for post 1" },
+        { id: 2, title: "Lorem Ipsu", body: "Some text for post 111" },
+        { id: 3, title: "Lorem Ips", body: "Some text for post 1234" },
+        { id: 4, title: "Lorem Ip", body: "Some text for post 5678" },
+      ],
+    };
   },
   methods: {},
 };
@@ -23,8 +32,9 @@ export default {
   box-sizing: border-box;
 }
 
-.post{
+.post {
   padding: 15px;
   border: solid 2px teal;
+  margin-top: 15px;
 }
 </style>
