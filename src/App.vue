@@ -1,6 +1,12 @@
 // Component MarkUp
 <template>
-  <div>
+  <div class="app">
+    <form>
+      <h4>Add New Post</h4>
+      <input class="input" type="text" placeholder="Post title" />
+      <input class="input" type="text" placeholder="Post Body" />
+      <button class="btn">Create</button>
+    </form>
     <div v-for="post in posts" class="post">
       <div><strong>Title:</strong>{{ post.title }}</div>
       <div><strong>Description:</strong>{{ post.body }}</div>
@@ -32,9 +38,40 @@ export default {
   box-sizing: border-box;
 }
 
+.app {
+  padding: 20px;
+}
+
 .post {
   padding: 15px;
   border: solid 2px teal;
   margin-top: 15px;
+}
+
+form {
+  display: flex;
+  flex-direction: column;
+}
+
+.input {
+  width: 100%;
+  border: solid 1px teal;
+  padding: 10px 15px;
+  margin-top: 15px;
+}
+
+.btn {
+  align-self: flex-end;
+  margin-top: 15px;
+  padding: 10px 15px;
+  background: none;
+  color: teal;
+  border: solid 1px teal;
+}
+
+.btn:hover {
+  background: teal;
+  color: white;
+  transition: 0.3s;
 }
 </style>
