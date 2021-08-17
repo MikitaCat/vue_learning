@@ -1,34 +1,22 @@
 // Component MarkUp
 <template>
   <div class="app">
-    <form @submit.prevent>
-      <h4>Add New Post</h4>
-      <input
-        v-bind:value="title"
-        @input="title = $event.target.value"
-        class="input"
-        type="text"
-        placeholder="Post title"
-      />
-      <input
-        v-bind:value="body"
-        @input="body = $event.target.value"
-        class="input"
-        type="text"
-        placeholder="Post Body"
-      />
-      <button class="btn" @click="createPost">Create</button>
-    </form>
-    <div v-for="post in posts" class="post">
-      <div><strong>Title:</strong>{{ post.title }}</div>
-      <div><strong>Description:</strong>{{ post.body }}</div>
-    </div>
+    <post-form />
+    <post-list />
   </div>
 </template>
 
 <script>
+//imports
+import PostList from "./components/PostList.vue";
+import PostForm from "./components/PostForm.vue";
 //Component model
 export default {
+  // Components registration
+  components: {
+    PostList,
+    PostForm,
+  },
   data() {
     return {
       posts: [
@@ -69,38 +57,5 @@ export default {
 
 .app {
   padding: 20px;
-}
-
-.post {
-  padding: 15px;
-  border: solid 2px teal;
-  margin-top: 15px;
-}
-
-form {
-  display: flex;
-  flex-direction: column;
-}
-
-.input {
-  width: 100%;
-  border: solid 1px teal;
-  padding: 10px 15px;
-  margin-top: 15px;
-}
-
-.btn {
-  align-self: flex-end;
-  margin-top: 15px;
-  padding: 10px 15px;
-  background: none;
-  color: teal;
-  border: solid 1px teal;
-}
-
-.btn:hover {
-  background: teal;
-  color: white;
-  transition: 0.3s;
 }
 </style>
