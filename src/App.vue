@@ -1,9 +1,15 @@
 // Component MarkUp
 <template>
   <div class="app">
-    <my-button @click.native="showDialog" style="margin: 15px 0;"
-      >Create Post</my-button
-    >
+    <h2>Posts Application</h2>
+    <div class="app__btns">
+      <my-button @click.native="showDialog">Create Post</my-button>
+      <my-select
+        :modelValue="selectedSort"
+        :options="sortOption"
+        @selectValue="changeValue"
+      />
+    </div>
     <my-dialog :show="dialogVisible" @hide="hideDialog">
       <post-form @create="createPost" />
     </my-dialog>
@@ -20,6 +26,7 @@ import PostList from "./components/PostList.vue";
 import PostForm from "./components/PostForm.vue";
 import MyDialog from "./components/UI/MyDialog.vue";
 import MyButton from "./components/UI/MyButton.vue";
+import MySelect from "./components/UI/MySelect.vue";
 
 //Component model
 export default {
@@ -29,17 +36,23 @@ export default {
     PostForm,
     MyDialog,
     MyButton,
+    MySelect,
   },
   data() {
     return {
       posts: [],
       dialogVisible: false,
       isLoading: false,
+      selectedSort: "",
+      sortOption: [
+        { value: "title", name: "header" },
+        { value: "body", name: "content" },
+      ],
     };
   },
   methods: {
     createPost(post) {
-      this.posts.push(post);
+      this.posts.unshift(post);
       this.dialogVisible = false;
     },
 
@@ -53,6 +66,10 @@ export default {
 
     hideDialog() {
       this.dialogVisible = false;
+    },
+
+    changeValue(value) {
+      this.selectedSort = value;
     },
 
     async fetchPosts() {
@@ -89,5 +106,11 @@ export default {
 
 .app {
   padding: 20px;
+}
+
+.app__btns {
+  margin: 15px 0;
+  display: flex;
+  justify-content: space-between;
 }
 </style>
