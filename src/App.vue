@@ -8,7 +8,8 @@
       <post-form @create="createPost" />
     </my-dialog>
 
-    <post-list @remove="removePost" :posts="posts" />
+    <post-list @remove="removePost" :posts="posts" v-if="!isLoading" />
+    <p v-else>Loading...</p>
   </div>
 </template>
 
@@ -33,6 +34,7 @@ export default {
     return {
       posts: [],
       dialogVisible: false,
+      isLoading: false,
     };
   },
   methods: {
@@ -55,12 +57,17 @@ export default {
 
     async fetchPosts() {
       try {
+        this.isLoading = true;
         const response = await axios.get(
           "https://jsonplaceholder.typicode.com/posts?_limit=10"
         );
         this.posts = response.data;
         console.log(response);
-      } catch (e) {}
+      } catch (e) {
+        alert(e);
+      } finally {
+        this.isLoading = false;
+      }
     },
 
     // inputTitle(event) {
