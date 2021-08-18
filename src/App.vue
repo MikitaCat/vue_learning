@@ -1,6 +1,7 @@
 // Component MarkUp
 <template>
   <div class="app">
+    <my-button @click.native="fetchPosts">Get Posts</my-button>
     <my-button @click.native="showDialog" style="margin: 15px 0;"
       >Create Post</my-button
     >
@@ -14,10 +15,12 @@
 
 <script>
 //imports
+import axios from "axios";
 import PostList from "./components/PostList.vue";
 import PostForm from "./components/PostForm.vue";
 import MyDialog from "./components/UI/MyDialog.vue";
 import MyButton from "./components/UI/MyButton.vue";
+
 //Component model
 export default {
   // Components registration
@@ -29,12 +32,7 @@ export default {
   },
   data() {
     return {
-      posts: [
-        { id: 1, title: "Lorem Ipsum", body: "Some text for post 1" },
-        { id: 2, title: "Lorem Ipsu", body: "Some text for post 111" },
-        { id: 3, title: "Lorem Ips", body: "Some text for post 1234" },
-        { id: 4, title: "Lorem Ip", body: "Some text for post 5678" },
-      ],
+      posts: [],
       dialogVisible: false,
     };
   },
@@ -54,6 +52,16 @@ export default {
 
     hideDialog() {
       this.dialogVisible = false;
+    },
+
+    async fetchPosts() {
+      try {
+        const response = await axios.get(
+          "https://jsonplaceholder.typicode.com/posts?_limit=10"
+        );
+        this.posts = response.data;
+        console.log(response);
+      } catch (e) {}
     },
 
     // inputTitle(event) {
