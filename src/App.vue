@@ -14,7 +14,7 @@
       <post-form @create="createPost" />
     </my-dialog>
 
-    <post-list @remove="removePost" :posts="posts" v-if="!isLoading" />
+    <post-list @remove="removePost" :posts="sortedPosts" v-if="!isLoading" />
     <p v-else>Loading...</p>
   </div>
 </template>
@@ -95,15 +95,25 @@ export default {
     this.fetchPosts();
   },
 
-  watch: {
-    selectedSort(newValue) {
-      this.posts.sort((post1, post2) => {
+  computed: {
+    sortedPosts() {
+      return [...this.posts].sort((post1, post2) => {
         return post1[this.selectedSort]?.localeCompare(
           post2[this.selectedSort]
         );
       });
     },
   },
+
+  // watch: {
+  //   selectedSort(newValue) {
+  //     this.posts.sort((post1, post2) => {
+  //       return post1[this.selectedSort]?.localeCompare(
+  //         post2[this.selectedSort]
+  //       );
+  //     });
+  //   },
+  // },
 };
 </script>
 
