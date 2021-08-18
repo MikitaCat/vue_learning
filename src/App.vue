@@ -2,6 +2,7 @@
 <template>
   <div class="app">
     <h2>Posts Application</h2>
+    <my-input v-model="searchQuery" />
     <div class="app__btns">
       <my-button @click.native="showDialog">Create Post</my-button>
       <my-select
@@ -14,7 +15,11 @@
       <post-form @create="createPost" />
     </my-dialog>
 
-    <post-list @remove="removePost" :posts="sortedPosts" v-if="!isLoading" />
+    <post-list
+      @remove="removePost"
+      :posts="searchInSortedPosts"
+      v-if="!isLoading"
+    />
     <p v-else>Loading...</p>
   </div>
 </template>
@@ -27,6 +32,7 @@ import PostForm from "./components/PostForm.vue";
 import MyDialog from "./components/UI/MyDialog.vue";
 import MyButton from "./components/UI/MyButton.vue";
 import MySelect from "./components/UI/MySelect.vue";
+import MyInput from "./components/UI/MyInput.vue";
 
 //Component model
 export default {
@@ -37,6 +43,7 @@ export default {
     MyDialog,
     MyButton,
     MySelect,
+    MyInput,
   },
   data() {
     return {
@@ -44,6 +51,7 @@ export default {
       dialogVisible: false,
       isLoading: false,
       selectedSort: "",
+      searchQuery: "",
       sortOption: [
         { value: "title", name: "header" },
         { value: "body", name: "content" },
@@ -102,6 +110,12 @@ export default {
           post2[this.selectedSort]
         );
       });
+    },
+
+    searchInSortedPosts() {
+      return this.sortedPosts.filter((post) =>
+        post.title.toLowerCase().includes(this.searchQuery.toLowerCase())
+      );
     },
   },
 
