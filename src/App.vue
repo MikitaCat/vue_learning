@@ -1,7 +1,6 @@
 // Component MarkUp
 <template>
   <div class="app">
-    <my-button @click.native="fetchPosts">Get Posts</my-button>
     <my-button @click.native="showDialog" style="margin: 15px 0;"
       >Create Post</my-button
     >
@@ -67,6 +66,9 @@ export default {
     // inputTitle(event) {
     //   this.title = event.target.value;
     // },
+  },
+  mounted() {
+    this.fetchPosts();
   },
 };
 </script>
