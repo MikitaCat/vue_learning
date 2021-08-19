@@ -16,6 +16,7 @@ export default {
   background: none;
   color: teal;
   border: solid 1px teal;
+  box-shadow: 3px 1px 1px teal;
 }
 
 .btn:hover {

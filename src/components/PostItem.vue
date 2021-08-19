@@ -33,5 +33,6 @@ export default {
   display: flex;
   align-items: center;
   justify-content: space-between;
+  box-shadow: 5px 2px 2px teal;
 }
 </style>
