@@ -96,7 +96,6 @@ export default {
 
     changePage(pageNumber) {
       this.page = pageNumber;
-      this.fetchPosts();
     },
 
     async fetchPosts() {
@@ -129,6 +128,12 @@ export default {
   },
   mounted() {
     this.fetchPosts();
+  },
+
+  watch: {
+    page() {
+      this.fetchPosts();
+    },
   },
 
   computed: {
