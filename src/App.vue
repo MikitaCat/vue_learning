@@ -21,6 +21,17 @@
       v-if="!isLoading"
     />
     <p v-else>Loading...</p>
+    <div class="page__wrapper">
+      <div
+        class="page"
+        :class="{ 'current-page': page === pageNumber }"
+        v-for="pageNumber in totalPages"
+        :key="pageNumber"
+        @click="changePage(pageNumber)"
+      >
+        {{ pageNumber }}
+      </div>
+    </div>
   </div>
 </template>
 
@@ -52,6 +63,9 @@ export default {
       isLoading: false,
       selectedSort: "",
       searchQuery: "",
+      page: 1,
+      limit: 10,
+      totalPages: 0,
       sortOption: [
         { value: "title", name: "header" },
         { value: "body", name: "content" },
@@ -80,11 +94,25 @@ export default {
       this.selectedSort = value;
     },
 
+    changePage(pageNumber) {
+      this.page = pageNumber;
+      this.fetchPosts();
+    },
+
     async fetchPosts() {
       try {
         this.isLoading = true;
         const response = await axios.get(
-          "https://jsonplaceholder.typicode.com/posts?_limit=10"
+          "https://jsonplaceholder.typicode.com/posts",
+          {
+            params: {
+              _page: this.page,
+              _limit: this.limit,
+            },
+          }
+        );
+        this.totalPages = Math.ceil(
+          response.headers["x-total-count"] / this.limit
         );
         this.posts = response.data;
         console.log(response);
@@ -146,5 +174,30 @@ export default {
   margin: 15px 0;
   display: flex;
   justify-content: space-between;
+}
+
+.page__wrapper {
+  display: flex;
+  margin-top: 15px;
+}
+
+.page {
+  border: solid 1px black;
+  border-radius: 4px;
+  padding: 10px;
+  cursor: pointer;
+  margin-left: 10px;
+}
+
+.page:hover {
+  background: teal;
+  color: white;
+  transition: 0.3s;
+}
+
+.current-page {
+  background: teal;
+  color: white;
+  transition: 00.3s;
 }
 </style>
